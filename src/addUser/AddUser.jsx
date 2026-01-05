@@ -2,6 +2,8 @@ import React,{useState} from 'react'
 import './addUser.css'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
+import toast from 'react-hot-toast';
+
 
 const AddUser = () => {
 
@@ -21,10 +23,10 @@ const AddUser = () => {
     }
 
     const submitForm = async(e)=>{
-        e.preventDefult();
-        await axios.post("http://localhost:5000/api/user", user)
+        e.preventDefault();
+        await axios.post("http://localhost:5500/api/user", user)
         .then((response)=>{
-            console.log("User Created Successfully");
+            toast.success(response.data.message, {position: "top-right"});
             navigate("/"); 
         })
         .catch((error)=>{
@@ -83,4 +85,4 @@ const AddUser = () => {
     </div>
 )}
 
-export default AddUser
+export default AddUser;
