@@ -42,9 +42,9 @@ useEffect(()=>{
                     <td>{user.email}</td>
                     <td>{user.address}</td>
                     <td className='actionButtons'>
-                        <button type="button" class="btn btn-success">
+                        <Link to={`/update/`+ user._id } type="button" class="btn btn-success">
                             <i class="fa-regular fa-pen-to-square"></i>
-                        </button>
+                        </Link>
                         <button type="button" class="btn btn-danger">
                             <i class="fa-solid fa-delete-left"></i>
                         </button>
