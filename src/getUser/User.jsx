@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react';
 import "./user.css";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const User = () => {
 const [users,setUsers] = useState([]);
@@ -17,13 +18,32 @@ useEffect(()=>{
     };
     fetchData()
 },[]);
+
+const deleteUser = async(userId) =>{
+    await axios
+    .delete(`http://localhost:5500/api/user/delete/${userId}`)
+    .then((response)=>{
+        setUsers((prevUser)=> prevUser.filter((user)=> user._id !== userId));
+        toast.success(response.data.message, {position: "top-right"})
+    })
+    .catch((error)=>{
+        console.log(error);
+    });
+};
  
   return (
     <div className="userTable">
         <Link to='/add' type="button" class="btn btn-primary">
             Add User <i class="fa-solid fa-user-plus"></i>
         </Link>
-        <table className='table table-bordered'>
+
+        {users.length === 0?(
+            <div className="noData">
+                <h3>No Data to Display</h3>
+                <p>Please add new User</p>
+            </div>
+        ):(
+            <table className='table table-bordered'>
             <thead>
                 <tr>
                     <th scope= "col">S.No</th>
@@ -45,8 +65,10 @@ useEffect(()=>{
                         <Link to={`/update/`+ user._id } type="button" class="btn btn-success">
                             <i class="fa-regular fa-pen-to-square"></i>
                         </Link>
-                        <button type="button" class="btn btn-danger">
-                            <i class="fa-solid fa-delete-left"></i>
+                        <button 
+                        onClick={()=>deleteUser(user._id)}
+                        type="button" class="btn btn-danger">
+                        <i class="fa-solid fa-delete-left"></i>
                         </button>
                     </td>
                 </tr>
@@ -56,6 +78,9 @@ useEffect(()=>{
             </tbody>
         </table>
     
+        )}
+
+        
     </div>
   )
 }

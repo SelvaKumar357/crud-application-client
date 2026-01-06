@@ -1,28 +1,90 @@
-.userTable{
+/* Base (Desktop) */
+.userTable {
     width: 60%;
     margin: 50px auto;
     background-color: white;
     padding: 50px;
     border-radius: 15px;
-    box-shadow: 1px 1px 8px rgba(0, 0,0, 0.065);
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
 }
 
-.userTable table{
+.userTable table {
     width: 100%;
     margin-top: 30px;
+    border-collapse: collapse;
 }
 
-.userTable table thead th{
+.userTable table thead th {
     background-color: blue;
     color: white;
+    padding: 12px;
 }
 
-.userTable table tbody td{
+.userTable table tbody td {
     padding: 10px;
     text-align: center;
     vertical-align: middle;
 }
 
-.actionButtons button{
+.actionButtons {
+    display: flex;
+    justify-content: center;
+}
+
+.actionButtons button {
     margin: 0 10px;
+}
+
+.noData {
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* ========================= */
+/* Mobile Responsive Styles */
+/* ========================= */
+
+@media (max-width: 768px) {
+    .userTable {
+        width: 95%;
+        margin: 20px auto;
+        padding: 20px;
+    }
+
+    /* Enable horizontal scroll for table */
+    .userTable {
+        overflow-x: auto;
+    }
+
+    .userTable table {
+        min-width: 600px;
+        font-size: 14px;
+    }
+
+    /* Stack buttons vertically */
+    .actionButtons {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .actionButtons button {
+        margin: 0;
+        width: 100%;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    .userTable {
+        padding: 15px;
+    }
+
+    .userTable table {
+        font-size: 13px;
+    }
+
+    .userTable table thead th,
+    .userTable table tbody td {
+        padding: 8px;
+    }
 }
